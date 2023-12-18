@@ -1,0 +1,119 @@
+[gd_scene load_steps=16 format=3 uid="uid://cgurjvtwvop1j"]
+
+[ext_resource type="Texture2D" uid="uid://p0bsh48ldhtt" path="res://Assets/Backgrounds/battlefield.png" id="1_kd0sq"]
+[ext_resource type="Script" path="res://Scenes/Dude.gd" id="2_v7ek5"]
+[ext_resource type="Texture2D" uid="uid://chgaf725n0hct" path="res://Assets/Characters/Dude_left_walk.png" id="3_jy6wo"]
+[ext_resource type="Texture2D" uid="uid://qffdk71qkkuk" path="res://Assets/Characters/Dude_left.png" id="4_od0jh"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6830i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bux7r"]
+size = Vector2(735, 45)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8x2dp"]
+size = Vector2(146, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nqdil"]
+size = Vector2(20, 57)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r2irh"]
+atlas = ExtResource("3_jy6wo")
+region = Rect2(0, 0, 100, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b68t0"]
+atlas = ExtResource("3_jy6wo")
+region = Rect2(100, 0, 100, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p7p7o"]
+atlas = ExtResource("3_jy6wo")
+region = Rect2(200, 0, 100, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6dhfv"]
+atlas = ExtResource("3_jy6wo")
+region = Rect2(300, 0, 100, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g674g"]
+atlas = ExtResource("3_jy6wo")
+region = Rect2(400, 0, 100, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wf3d7"]
+atlas = ExtResource("3_jy6wo")
+region = Rect2(500, 0, 100, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6a31o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r2irh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b68t0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p7p7o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6dhfv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g674g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wf3d7")
+}],
+"loop": true,
+"name": &"running_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_od0jh")
+}],
+"loop": true,
+"name": &"standing_left",
+"speed": 5.0
+}]
+
+[node name="Battlefield" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_6830i")
+
+[node name="Battlefield" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(568, 360)
+texture = ExtResource("1_kd0sq")
+
+[node name="Floor" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(556.5, 426.5)
+shape = SubResource("RectangleShape2D_bux7r")
+
+[node name="Platform Top" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(546, 234)
+shape = SubResource("RectangleShape2D_8x2dp")
+one_way_collision = true
+
+[node name="Platform Left" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(382, 317.5)
+shape = SubResource("RectangleShape2D_8x2dp")
+one_way_collision = true
+
+[node name="Platform Right" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(714, 318)
+shape = SubResource("RectangleShape2D_8x2dp")
+one_way_collision = true
+
+[node name="Dude" type="CharacterBody2D" parent="."]
+position = Vector2(3.05176e-05, 3.05176e-05)
+scale = Vector2(1, 1)
+script = ExtResource("2_v7ek5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dude"]
+position = Vector2(254, 374.5)
+shape = SubResource("RectangleShape2D_nqdil")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Dude"]
+position = Vector2(254, 374)
+scale = Vector2(0.28, 0.287932)
+sprite_frames = SubResource("SpriteFrames_6a31o")
+animation = &"running_left"
+speed_scale = 5.0
